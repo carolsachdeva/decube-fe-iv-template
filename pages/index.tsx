@@ -1,10 +1,24 @@
 import { Inter } from "next/font/google";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import fetch from 'node-fetch';
+
+import Movies from '@/services/movies';
 
 const inter = Inter({ subsets: ["latin"] });
 const cn = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 export default function Home() {
+
+
+  const [page, setPage] = useState<number>(1);
+
+  const { data, isLoading, isError, isSuccess } = useQuery({
+    queryKey: ['getPopularMovies', page],
+    queryFn: () => Movies.fetchPopularMovies({ page }),
+  })
+
   return (
     <main
       className={cn(
