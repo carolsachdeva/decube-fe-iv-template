@@ -52,8 +52,8 @@ export default function Home() {
     }
 
     const handlePaginatorClick = () => {
-      if (page > 1) {
-        setPage(prev => prev - 1)
+      if (data && (page <= data?.total_pages)) {
+        setPage(prev => prev + 1)
       }
       window.scrollTo({
         top: 0,
