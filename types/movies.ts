@@ -12,7 +12,7 @@ export interface GetPopularMovieResponse {
     results: Movie[];
 }
 
-interface Movie {
+export interface Movie {
     id: number,
     adult: boolean,
     backdrop_path: string,
