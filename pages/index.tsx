@@ -1,8 +1,7 @@
 import { Inter } from "next/font/google";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
-import fetch from 'node-fetch';
 
 import Movies from '@/services/movies';
 
