@@ -2,6 +2,7 @@ import { GetMovieDetailsParams, GetMovieDetailsResponse, GetPopularMovieParams, 
 import axios, { AxiosRequestConfig } from "axios"
 
 type MassagedGetPopularMovieParams = Omit<GetPopularMovieParams, 'language' | 'region'>
+type MassagedGetMovieDetailsParams = Omit<GetMovieDetailsParams, 'language'>
 
 const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
@@ -38,11 +39,14 @@ const fetchPopularMovies = async (params: MassagedGetPopularMovieParams): Promis
     return await apiRequest<GetPopularMovieResponse>(config);
 }
 
-const fetchMovieDetails = async (params: GetMovieDetailsParams): Promise<GetMovieDetailsResponse> => {
-    const { movie_id} = params;
+const fetchMovieDetails = async (params: MassagedGetMovieDetailsParams): Promise<GetMovieDetailsResponse> => {
+    const { movie_id } = params;
     const config: AxiosRequestConfig = {
         method: "GET",
         url: `/3/movie/${movie_id}`,
+        params: {
+            language: 'en-US'
+        }
       };
     return await apiRequest<GetMovieDetailsResponse>(config);
 }
